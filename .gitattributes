@@ -1,7 +1,8 @@
-# Force Dart detection
+# ✅ Allow Dart and Java only
 *.dart linguist-language=Dart
+*.java linguist-language=Java
 
-# Ignore all other types
+# 🚫 Hide all other file types from language stats
 *.yaml linguist-detectable=false
 *.xml linguist-detectable=false
 *.gradle linguist-detectable=false
@@ -11,15 +12,16 @@
 *.cpp linguist-detectable=false
 *.c linguist-detectable=false
 *.h linguist-detectable=false
-*.java linguist-detectable=false
 *.cmake linguist-detectable=false
 *.md linguist-detectable=false
 *.txt linguist-detectable=false
+*.kt linguist-detectable=false
+*.swift linguist-detectable=false
 
-# Ignore build or platform folders
-android/* linguist-detectable=false
-ios/* linguist-detectable=false
-linux/* linguist-detectable=false
-macos/* linguist-detectable=false
-windows/* linguist-detectable=false
-build/* linguist-detectable=false
+# 🚫 Hide folders that contain other language files
+/android/* linguist-detectable=false
+/ios/* linguist-detectable=false
+/linux/* linguist-detectable=false
+/macos/* linguist-detectable=false
+/windows/* linguist-detectable=false
+/build/* linguist-detectable=false
