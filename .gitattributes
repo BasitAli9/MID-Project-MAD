@@ -1,9 +1,19 @@
 *.dart linguist-language=Dart
+
+# Ignore other file types
 *.yaml linguist-detectable=false
 *.xml linguist-detectable=false
 *.gradle linguist-detectable=false
 *.html linguist-detectable=false
 *.css linguist-detectable=false
 *.json linguist-detectable=false
-/android/* linguist-detectable=false
-/ios/* linguist-detectable=false
+*.cpp linguist-detectable=false
+*.c linguist-detectable=false
+*.h linguist-detectable=false
+*.java linguist-detectable=false
+*.cmake linguist-detectable=false
+
+# Ignore full folders (Android/iOS/build)
+android/* linguist-detectable=false
+ios/* linguist-detectable=false
+build/* linguist-detectable=false
