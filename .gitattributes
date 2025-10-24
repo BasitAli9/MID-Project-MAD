@@ -1,0 +1,9 @@
+*.dart linguist-language=Dart
+*.yaml linguist-detectable=false
+*.xml linguist-detectable=false
+*.gradle linguist-detectable=false
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.json linguist-detectable=false
+/android/* linguist-detectable=false
+/ios/* linguist-detectable=false
