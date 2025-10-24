@@ -1,6 +1,7 @@
+# Force Dart detection
 *.dart linguist-language=Dart
 
-# Ignore other file types
+# Ignore all other types
 *.yaml linguist-detectable=false
 *.xml linguist-detectable=false
 *.gradle linguist-detectable=false
@@ -12,8 +13,13 @@
 *.h linguist-detectable=false
 *.java linguist-detectable=false
 *.cmake linguist-detectable=false
+*.md linguist-detectable=false
+*.txt linguist-detectable=false
 
-# Ignore full folders (Android/iOS/build)
+# Ignore build or platform folders
 android/* linguist-detectable=false
 ios/* linguist-detectable=false
+linux/* linguist-detectable=false
+macos/* linguist-detectable=false
+windows/* linguist-detectable=false
 build/* linguist-detectable=false
