@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const DigitalCardApp());
@@ -14,9 +15,7 @@ class DigitalCardApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Digital Visiting Card',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
+      theme: ThemeData(primarySwatch: Colors.indigo),
       home: const VisitingCardScreen(),
     );
   }
@@ -62,8 +61,19 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
     phone: "+92 311 1559530",
     email: "54596@students.riphah.edu.pk",
     website: "https://www.basitdev.com",
-    imagePath: "assets/profile.jpg", // <-- your image path
+    imagePath: "assets/profile.jpg",
   );
+
+  // ✅ Function to open website or email
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Could not launch $url")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +93,7 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 600),
             curve: Curves.easeInOut,
-            height: 320,
+            height: 330,
             width: 380,
             decoration: BoxDecoration(
               color: showFront ? Colors.indigo : Colors.white,
@@ -105,7 +115,8 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
                   child: child,
                   builder: (context, child) {
                     final isUnder = (ValueKey(showFront) != child!.key);
-                    final value = isUnder ? min(rotate.value, pi / 2) : rotate.value;
+                    final value =
+                    isUnder ? min(rotate.value, pi / 2) : rotate.value;
                     return Transform(
                       transform: Matrix4.rotationY(value),
                       alignment: Alignment.center,
@@ -184,11 +195,11 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _infoRow(Icons.phone, user.phone),
+          _infoRow(Icons.phone, user.phone, "tel:${user.phone}"),
           const SizedBox(height: 10),
-          _infoRow(Icons.email, user.email),
+          _infoRow(Icons.email, user.email, "mailto:${user.email}"),
           const SizedBox(height: 10),
-          _infoRow(Icons.web, user.website),
+          _infoRow(Icons.web, user.website, user.website),
           const SizedBox(height: 20),
 
           // QR CODE FEATURE
@@ -217,24 +228,26 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
     );
   }
 
-
   // -------------------------
-  // REUSABLE ROW FOR ICON + TEXT
+  // REUSABLE ROW FOR ICON + TEXT + CLICK
   // -------------------------
-  Widget _infoRow(IconData icon, String text) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: Colors.indigo),
-        const SizedBox(width: 10),
-        Flexible(
-          child: Text(
-            text,
-            style: const TextStyle(fontSize: 16, color: Colors.black87),
-            overflow: TextOverflow.ellipsis,
+  Widget _infoRow(IconData icon, String text, String link) {
+    return InkWell(
+      onTap: () => _launchUrl(link),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: Colors.indigo),
+          const SizedBox(width: 10),
+          Flexible(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 16, color: Colors.black87),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
