@@ -1,8 +1,8 @@
-# ✅ Allow Dart and Java only
+# ✅ Allow only Dart and Java to appear in GitHub language stats
 *.dart linguist-language=Dart
 *.java linguist-language=Java
 
-# 🚫 Hide all other file types from language stats
+# 🚫 Hide all other file types
 *.yaml linguist-detectable=false
 *.xml linguist-detectable=false
 *.gradle linguist-detectable=false
@@ -12,13 +12,14 @@
 *.cpp linguist-detectable=false
 *.c linguist-detectable=false
 *.h linguist-detectable=false
+*.hpp linguist-detectable=false
 *.cmake linguist-detectable=false
 *.md linguist-detectable=false
 *.txt linguist-detectable=false
 *.kt linguist-detectable=false
 *.swift linguist-detectable=false
 
-# 🚫 Hide folders that contain other language files
+# 🚫 Hide folders that usually contain other languages
 /android/* linguist-detectable=false
 /ios/* linguist-detectable=false
 /linux/* linguist-detectable=false
