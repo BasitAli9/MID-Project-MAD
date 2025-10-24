@@ -217,6 +217,7 @@ class _VisitingCardScreenState extends State<VisitingCardScreen> {
     );
   }
 
+
   // -------------------------
   // REUSABLE ROW FOR ICON + TEXT
   // -------------------------
